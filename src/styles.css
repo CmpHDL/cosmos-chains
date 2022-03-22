@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+  background-image: url("/assets/img/background.gif");
+  background-repeat: repeat;
+  background-color: black;
+}
+
+html, body, h1, h3, h4{ height: 100%; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif !important; }
+body { margin: 0; }

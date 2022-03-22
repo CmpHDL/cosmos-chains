@@ -1,0 +1,25 @@
+.example-form-field {
+  width: 100%;
+  font-size: 1.2em;
+}
+
+/* input color class */
+::ng-deep input.mat-input-element {
+  color: lightgrey;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label, .mat-icon {
+  color: #3fa9f5 !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+  background-color: #3fa9f5 !important;
+}
+
+.btn-aqua {
+  background-color: #000;
+  color: #3fa9f5;
+  border: 1px solid #3fa9f5;
+}

@@ -1,0 +1,42 @@
+<div class="block text-white w-100 mb-4" style="padding: 0.75em;">
+  <!-- Chain Logo -->
+  <div class="w-100 d-flex p-0">
+    <img (error)="handleMissingImage($event);" class="chain-logo ms-auto me-auto" *ngIf="!!chain!.asset_list!.assets[0].logo_URIs.svg" [src]="chain!.asset_list!.assets[0]!.logo_URIs.svg" width="100" height="100">
+    <img (error)="handleMissingImage($event);" class="chain-logo ms-auto me-auto" *ngIf="!!chain!.asset_list!.assets[0].logo_URIs.png && !chain!.asset_list!.assets[0].logo_URIs.svg" [src]="chain!.asset_list!.assets[0]!.logo_URIs.png" width="100" height="100">
+    <img class="chain-logo ms-auto me-auto" *ngIf="!chain!.asset_list!.assets[0].logo_URIs.svg && !chain!.asset_list!.assets[0].logo_URIs.png" src="assets/img/not-found-coin.png" width="100" height="100">
+  </div>
+
+  <!-- Status & Add Chain -->
+  <div class="status-chain-block">
+    <!-- o Status -->
+    <div class="status-line d-inline-block">
+      <!-- Non-killed status will result in a grey status -->
+      <span [class.online]="this.isChainLive()"
+            [class.offline]="this.isChainKilled()"
+            class="dot online d-inline-block"
+            style="margin-left: 0.5em;"></span>
+      <p *ngIf="this.isChainLive()" class="status ms-2 d-inline-block mb-0">Online</p>
+      <p *ngIf="!this.isChainLive()" class="status ms-2 d-inline-block mb-0">Offline</p>
+    </div>
+
+    <!-- Add Chain -->
+    <button mat-raised-button class="btn-outline-info float-end d-inline-block" style="margin-top: -0.3em;" (click)="onAddChainClick(chain!);">Add Chain</button>
+  </div>
+
+  <!-- Chain Info -->
+  <div class="text-white chain-info mb-2 text-center">
+    <h1 class="fw-light mb-0">{{ chain?.pretty_name }}</h1>
+    <h3 class="fw-light mt-0 mb-0" style="font-size: large;">Chain ID: {{ chain?.chain_id }}</h3>
+  </div>
+
+  <!-- Chain Assets -->
+  <div *ngIf="!!chain?.asset_list?.assets" class="d-flex" style="margin-bottom: calc(-0.75em - 25px)">
+    <div *ngFor="let asset of chain?.asset_list?.assets"
+      class="d-flex flex-column align-items-center me-2">
+      <p class="fw-light mb-1">{{ asset.display | titlecase }}</p>
+      <img (error)="handleMissingImage($event);" *ngIf="asset.logo_URIs.svg" [src]="asset.logo_URIs.svg" height="50" width="50">
+      <img (error)="handleMissingImage($event);" *ngIf="!asset.logo_URIs.svg && asset.logo_URIs.png" [src]="asset.logo_URIs.png" height="50" width="50">
+      <img *ngIf="!asset.logo_URIs.svg && !asset.logo_URIs.png" src="assets/img/not-found-coin.png" height="50" width="50">
+    </div>
+  </div>
+</div>
